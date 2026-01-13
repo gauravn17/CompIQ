@@ -1,4 +1,4 @@
-# 🔍 CompIq - Agentic AI Comparables Finder
+# 🔍 CompIQ - Agentic AI Comparables Finder
 
 <img src="compiq.png" alt="CompIQ Logo" width="750"/>
 
