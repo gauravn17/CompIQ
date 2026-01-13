@@ -1,6 +1,6 @@
 # 🔍 CompIq - Agentic AI Comparables Finder
 
-<img src="compiq.png" alt="CompIQ Logo" width="150"/>
+<img src="compiq.png" alt="CompIQ Logo" width="550"/>
 
 An intelligent, agentic system for finding publicly-traded comparable companies using AI-powered analysis.
 
