@@ -1,6 +1,6 @@
-# 🔍 EquiComp - Agentic AI Comparables Finder
+# 🔍 CompIq - Agentic AI Comparables Finder
 
-![img](equicomp.png)
+<img src="compiq.png" alt="CompIQ Logo" width="150"/>
 
 An intelligent, agentic system for finding publicly-traded comparable companies using AI-powered analysis.
 
