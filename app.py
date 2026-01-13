@@ -29,30 +29,30 @@ st.markdown("""
     .logo-container {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 1.5rem;
         margin-bottom: 1rem;
     }
     .logo-image {
-        width: 120px;
-        height: 120px;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        width: 150px;
+        height: 150px;
+        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
     .brand-title {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: bold;
         color: #000000;
         margin: 0;
         line-height: 1.2;
     }
     .brand-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         color: #666;
         margin: 0;
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
     }
     /* Add subtle shadow to images for better visibility */
     img {
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
     .status-box {
         padding: 1rem;
@@ -153,18 +153,18 @@ def render_company_card(comp: Dict[str, Any], rank: int):
 
 def main():
     # Header with logo
-    col1, col2 = st.columns([1, 4])
+    col1, col2 = st.columns([1.2, 3.8])
     
     with col1:
         # Display logo - larger and more prominent
         try:
-            st.image("compiq.png", width=120)
+            st.image("compiq.png", width=150)
         except:
             st.markdown("🔍")
     
     with col2:
         st.markdown("""
-        <div>
+        <div style="padding-top: 20px;">
             <h1 class="brand-title">CompIQ</h1>
             <p class="brand-subtitle">AI-Powered Comparable Company Analysis</p>
         </div>
@@ -175,15 +175,15 @@ def main():
     # Sidebar
     with st.sidebar:
         # Logo in sidebar - centered and larger
-        col1, col2, col3 = st.columns([1, 2, 1])
+        col1, col2, col3 = st.columns([0.5, 3, 0.5])
         with col2:
             try:
-                st.image("compiq.png", width=100)
+                st.image("compiq.png", width=120)
             except:
                 pass
         
-        st.markdown("<h3 style='text-align: center;'>CompIQ</h3>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #666;'>AI Comparables Finder</p>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; margin-top: 10px;'>CompIQ</h3>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #666; margin-bottom: 20px;'>AI Comparables Finder</p>", unsafe_allow_html=True)
         
         st.divider()
         
