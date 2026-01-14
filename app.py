@@ -698,4 +698,3 @@ if __name__ == "__main__":
     # Load history on startup
     load_search_history()
     main()
-
