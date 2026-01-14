@@ -239,7 +239,10 @@ def render_company_card(comp: Dict[str, Any], rank: int):
         </div>
         """
     
-    card_html += "    </div></div>"
+    # Close the card div
+    card_html += """
+    </div>
+    """
     
     st.markdown(card_html, unsafe_allow_html=True)
     
@@ -695,3 +698,4 @@ if __name__ == "__main__":
     # Load history on startup
     load_search_history()
     main()
+
