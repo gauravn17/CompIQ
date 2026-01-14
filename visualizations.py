@@ -51,7 +51,10 @@ class CompIQVisualizer:
     def create_valuation_comparison(comparables: List[Dict[str, Any]]) -> go.Figure:
         """
         Create bubble chart comparing market cap vs. revenue multiple.
+        With jitter to prevent overlapping dots.
         """
+        import numpy as np
+        
         data = []
         
         for comp in comparables:
@@ -70,28 +73,45 @@ class CompIQVisualizer:
         
         df = pd.DataFrame(data)
         
+        # Add small random jitter to prevent exact overlaps (5% of value)
+        np.random.seed(42)  # Consistent jitter
+        df['market_cap_jitter'] = df['market_cap'] * (1 + np.random.uniform(-0.05, 0.05, len(df)))
+        df['ev_revenue_jitter'] = df['ev_revenue'] * (1 + np.random.uniform(-0.02, 0.02, len(df)))
+        
         fig = px.scatter(
             df,
-            x='market_cap',
-            y='ev_revenue',
+            x='market_cap_jitter',
+            y='ev_revenue_jitter',
             size='score',
             color='score',
-            hover_data=['name', 'ticker'],
-            text='name',
+            hover_data={'name': True, 'ticker': True, 
+                       'market_cap_jitter': False, 'ev_revenue_jitter': False,
+                       'market_cap': ':$,.0f', 'ev_revenue': ':.2f'},
+            text='ticker',  # Show ticker instead of full name
             color_continuous_scale='RdYlGn',
             labels={
-                'market_cap': 'Market Cap ($)',
-                'ev_revenue': 'EV/Revenue Multiple',
+                'market_cap_jitter': 'Market Cap ($)',
+                'ev_revenue_jitter': 'EV/Revenue Multiple',
                 'score': 'Match Score'
             }
         )
         
-        fig.update_traces(textposition='top center')
+        fig.update_traces(
+            textposition='top center',
+            textfont_size=10,
+            marker=dict(
+                line=dict(width=1, color='white'),
+                sizemode='diameter',
+                sizemin=8
+            )
+        )
+        
         fig.update_layout(
-            title="Valuation Comparison",
+            title="Valuation Comparison (Market Cap vs EV/Revenue)",
             xaxis_type='log',
             height=500,
-            showlegend=False
+            showlegend=False,
+            hovermode='closest'
         )
         
         return fig
@@ -319,11 +339,10 @@ def render_comparison_matrix(
 def render_financial_summary(comparables: List[Dict[str, Any]]):
     """
     Render financial summary metrics for peer group.
+    No header - app.py adds it.
     """
     visualizer = CompIQVisualizer()
     summary = visualizer.create_valuation_summary_card(comparables)
-    
-    st.subheader("💰 Peer Group Valuation Metrics")
     
     col1, col2, col3, col4 = st.columns(4)
     
