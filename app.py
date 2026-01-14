@@ -193,16 +193,22 @@ def main():
         api_key = st.text_input(
             "OpenAI API Key",
             type="password",
-            value=os.getenv("OPENAI_API_KEY", ""),
-            help="Your OpenAI API key for running the analysis"
+            value="",  # Never show existing key
+            placeholder="sk-proj-...",
+            help="Your OpenAI API key for running the analysis. Get one at: https://platform.openai.com/api-keys"
         )
         
-        if not api_key:
-            st.warning("⚠️ Please enter your OpenAI API key to use CompIQ")
-            st.info("💡 Get your API key at: https://platform.openai.com/api-keys")
-        else:
+        # Check if key exists in environment (from Streamlit secrets)
+        env_key = os.getenv("OPENAI_API_KEY", "")
+        
+        if api_key:
             os.environ["OPENAI_API_KEY"] = api_key
             st.success("✅ API key configured")
+        elif env_key:
+            st.success("✅ API key loaded from environment")
+        else:
+            st.warning("⚠️ Please enter your OpenAI API key to use CompIQ")
+            st.info("💡 Get your API key at: https://platform.openai.com/api-keys")
         
         st.divider()
         
