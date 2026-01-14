@@ -9,6 +9,15 @@ import json
 from comps_agent import ComparablesAgent
 from database import Database, SearchHistory
 
+# Try to import v2.0 features (graceful degradation if not available)
+try:
+    from financial_data import FinancialDataEnricher
+    from visualizations import CompIQVisualizer, render_financial_summary, render_comparison_matrix
+    ENHANCED_FEATURES = True
+except ImportError:
+    ENHANCED_FEATURES = False
+    print("⚠️ Enhanced features not available. Run: pip install yfinance plotly")
+
 # Page configuration
 st.set_page_config(
     page_title="CompIQ - AI Comparables Finder",
@@ -87,6 +96,14 @@ st.markdown("""
     .score-high { background-color: #2ca02c; }
     .score-medium { background-color: #ff7f0e; }
     .score-low { background-color: #d62728; }
+    .v2-badge {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -99,6 +116,8 @@ if 'search_results' not in st.session_state:
     st.session_state.search_results = None
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
+if 'show_enhanced' not in st.session_state:
+    st.session_state.show_enhanced = ENHANCED_FEATURES
 
 def load_search_history():
     """Load recent searches from database"""
@@ -140,6 +159,19 @@ def render_company_card(comp: Dict[str, Any], rank: int):
             st.write("**Customer Segment:**", comp.get('customer_segment', 'N/A'))
             st.write("**SIC Industry:**", comp.get('SIC_industry', 'N/A'))
             st.write("**Website:**", comp.get('url', 'N/A'))
+            
+            # Show financial data if available
+            if ENHANCED_FEATURES and comp.get('financials'):
+                fin = comp['financials']
+                st.write("---")
+                st.write("**💰 Financial Metrics:**")
+                if fin.get('market_cap_formatted'):
+                    st.write(f"Market Cap: {fin['market_cap_formatted']}")
+                if fin.get('revenue_ttm_formatted'):
+                    st.write(f"Revenue (TTM): {fin['revenue_ttm_formatted']}")
+                if fin.get('ev_to_revenue'):
+                    st.write(f"EV/Revenue: {fin['ev_to_revenue']:.2f}x")
+        
         with col2:
             st.write("**Score Breakdown:**")
             breakdown = comp.get('score_breakdown', {})
@@ -169,6 +201,8 @@ def main():
             <p class="brand-subtitle">AI-Powered Comparable Company Analysis</p>
         </div>
         """, unsafe_allow_html=True)
+        if ENHANCED_FEATURES:
+            st.markdown('<span class="v2-badge">v2.0 ENHANCED</span>', unsafe_allow_html=True)
     
     st.divider()
     
@@ -217,6 +251,24 @@ def main():
         min_required = st.slider("Minimum Comparables", 1, 10, 3)
         max_allowed = st.slider("Maximum Comparables", 5, 20, 10)
         max_attempts = st.slider("Max Search Attempts", 1, 5, 3)
+        
+        # v2.0 Feature Toggle
+        if ENHANCED_FEATURES:
+            st.divider()
+            st.subheader("🎛️ v2.0 Features")
+            enable_financials = st.checkbox(
+                "Financial Data", 
+                value=True,
+                help="Pull real-time market cap, revenue, multiples"
+            )
+            enable_charts = st.checkbox(
+                "Interactive Charts",
+                value=True,
+                help="Show visualizations and comparisons"
+            )
+        else:
+            enable_financials = False
+            enable_charts = False
         
         st.divider()
         
@@ -273,14 +325,14 @@ def main():
                 
                 primary_sic = st.text_input(
                     "Primary SIC (Optional)",
-                    placeholder="e.g., Computer Programming Services"
+                    placeholder="e.g., Prepackaged Software"
                 )
             
             submitted = st.form_submit_button("🚀 Find Comparables", use_container_width=True)
         
         # Process search
         if submitted and company_name and company_description:
-            if not api_key:
+            if not (api_key or env_key):
                 st.error("⚠️ Please provide an OpenAI API key in the sidebar")
             else:
                 # Create target company dict
@@ -314,6 +366,14 @@ def main():
                         target,
                         progress_callback=lambda step, progress: progress_bar.progress(progress)
                     )
+                    
+                    # Enrich with financial data if enabled
+                    if ENHANCED_FEATURES and enable_financials:
+                        progress_bar.progress(95)
+                        status_container.markdown('<div class="status-box status-analyzing">💰 Loading financial data...</div>', unsafe_allow_html=True)
+                        
+                        enricher = FinancialDataEnricher()
+                        results['comparables'] = enricher.enrich_batch(results['comparables'])
                     
                     progress_bar.progress(100)
                     status_container.markdown('<div class="status-box status-complete">✅ Search complete!</div>', unsafe_allow_html=True)
@@ -387,7 +447,53 @@ def main():
             
             st.divider()
             
-            # Comparable companies
+            # ===== v2.0 ENHANCED FEATURES =====
+            if ENHANCED_FEATURES and enable_charts:
+                try:
+                    # Financial Summary
+                    st.subheader("💰 Peer Group Valuation Metrics")
+                    render_financial_summary(comparables)
+                    
+                    st.divider()
+                    
+                    # Visual Analysis
+                    st.subheader("📊 Visual Analysis")
+                    visualizer = CompIQVisualizer()
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        score_fig = visualizer.create_score_distribution(comparables)
+                        st.plotly_chart(score_fig, use_container_width=True)
+                    
+                    with col2:
+                        val_fig = visualizer.create_valuation_comparison(comparables)
+                        if val_fig:
+                            st.plotly_chart(val_fig, use_container_width=True)
+                        else:
+                            st.info("💡 Valuation data not available for all companies")
+                    
+                    # Radar comparison
+                    radar_fig = visualizer.create_radar_comparison(comparables, top_n=5)
+                    st.plotly_chart(radar_fig, use_container_width=True)
+                    
+                    st.divider()
+                    
+                    # Comparison Matrix
+                    render_comparison_matrix(comparables, top_n=5)
+                    
+                    st.divider()
+                    
+                    # Detailed Metrics Table
+                    st.subheader("📋 Detailed Financial Metrics")
+                    metrics_df = visualizer.create_peer_metrics_table(comparables)
+                    st.dataframe(metrics_df, use_container_width=True)
+                    
+                    st.divider()
+                    
+                except Exception as e:
+                    st.warning(f"Some enhanced features unavailable: {e}")
+            
+            # Comparable companies (basic cards)
             st.subheader("📋 Comparable Companies")
             
             for i, comp in enumerate(comparables, 1):
@@ -416,17 +522,31 @@ def main():
             
             with col1:
                 # CSV export
-                csv_data = pd.DataFrame([{
-                    'Rank': i+1,
-                    'Name': c['name'],
-                    'Ticker': c['ticker'],
-                    'Exchange': c['exchange'],
-                    'Score': c['validation_score'],
-                    'Business': c.get('business_activity', ''),
-                    'Customer Segment': c.get('customer_segment', ''),
-                    'SIC Industry': c.get('SIC_industry', ''),
-                    'URL': c.get('url', '')
-                } for i, c in enumerate(comparables)])
+                if ENHANCED_FEATURES and comparables[0].get('financials'):
+                    csv_data = pd.DataFrame([{
+                        'Rank': i+1,
+                        'Name': c['name'],
+                        'Ticker': c['ticker'],
+                        'Exchange': c['exchange'],
+                        'Score': c['validation_score'],
+                        'Market Cap': c.get('financials', {}).get('market_cap_formatted', 'N/A'),
+                        'Revenue': c.get('financials', {}).get('revenue_ttm_formatted', 'N/A'),
+                        'EV/Revenue': c.get('financials', {}).get('ev_to_revenue', 'N/A'),
+                        'Business': c.get('business_activity', ''),
+                        'URL': c.get('url', '')
+                    } for i, c in enumerate(comparables)])
+                else:
+                    csv_data = pd.DataFrame([{
+                        'Rank': i+1,
+                        'Name': c['name'],
+                        'Ticker': c['ticker'],
+                        'Exchange': c['exchange'],
+                        'Score': c['validation_score'],
+                        'Business': c.get('business_activity', ''),
+                        'Customer Segment': c.get('customer_segment', ''),
+                        'SIC Industry': c.get('SIC_industry', ''),
+                        'URL': c.get('url', '')
+                    } for i, c in enumerate(comparables)])
                 
                 st.download_button(
                     "📄 Download CSV",
