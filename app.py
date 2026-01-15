@@ -42,19 +42,19 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     .logo-image {
-        width: 150px;
-        height: 150px;
+        width: 250px;
+        height: 250px;
         filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
     .brand-title {
-        font-size: 3.5rem;
+        font-size: 4.5rem;
         font-weight: bold;
         color: #000000;
         margin: 0;
-        line-height: 1.2;
+        line-height: 1.5;
     }
     .brand-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         color: #666;
         margin: 0;
         margin-top: 0.5rem;
