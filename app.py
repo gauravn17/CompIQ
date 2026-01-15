@@ -42,19 +42,19 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     .logo-image {
-        width: 250px;
-        height: 250px;
+        width: 150px;
+        height: 150px;
         filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
     .brand-title {
-        font-size: 4.5rem;
+        font-size: 3.5rem;
         font-weight: bold;
         color: #000000;
         margin: 0;
-        line-height: 1.5;
+        line-height: 1.2;
     }
     .brand-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: #666;
         margin: 0;
         margin-top: 0.5rem;
@@ -292,13 +292,13 @@ def render_company_card(comp: Dict[str, Any], rank: int):
 def main():
     # Professional header with perfect alignment
     st.markdown("""
-    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
-        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 15px;">
+        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
             🔍
         </div>
         <div style="flex: 1;">
-            <h1 style="margin: 0; font-size: 2.5rem; font-weight: 700; color: #000000; line-height: 1.2;">CompIQ</h1>
-            <p style="margin: 0.25rem 0 0 0; font-size: 1.05rem; color: #666; font-weight: 400;">AI-Powered Comparable Company Analysis</p>
+            <h1 style="margin: 0; font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">CompIQ</h1>
+            <p style="margin: 0.25rem 0 0 0; font-size: 1.05rem; color: #aaa; font-weight: 400;">AI-Powered Comparable Company Analysis</p>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -401,11 +401,11 @@ def main():
     with tab1:
         # Stunning hero section
         st.markdown("""
-        <div style="text-align: center; padding: 3.5rem 2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%); border-radius: 20px; margin-bottom: 3rem;">
-            <h1 style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.25rem; letter-spacing: -0.02em;">
+        <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%); border-radius: 15px; margin-bottom: 2rem;">
+            <h1 style="font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; letter-spacing: -0.02em;">
                 Find Your Perfect Comparables
             </h1>
-            <p style="font-size: 1.4rem; color: #444; margin-bottom: 2.5rem; font-weight: 400; max-width: 700px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 1.1rem; color: #aaa; margin-bottom: 2rem; font-weight: 400; max-width: 600px; margin-left: auto; margin-right: auto;">
                 AI-powered company analysis • Delivered in seconds
             </p>
             <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; max-width: 750px; margin: 0 auto;">
@@ -436,28 +436,28 @@ def main():
         
         with col1:
             st.markdown("""
-            <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white; height: 260px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);">
-                <div style="font-size: 3.5rem; margin-bottom: 1.25rem;">🎯</div>
-                <h3 style="margin: 0 0 1rem 0; color: white; font-size: 1.5rem; font-weight: 700;">Smart Analysis</h3>
-                <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">AI deeply understands your business model and finds the best matches</p>
+            <div style="text-align: center; padding: 1.75rem 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; height: 200px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);">
+                <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🎯</div>
+                <h3 style="margin: 0 0 0.75rem 0; color: white; font-size: 1.25rem; font-weight: 600;">Smart Analysis</h3>
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.95; line-height: 1.5;">AI understands your business model</p>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown("""
-            <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; color: white; height: 260px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(245, 87, 108, 0.25);">
-                <div style="font-size: 3.5rem; margin-bottom: 1.25rem;">⚡</div>
-                <h3 style="margin: 0 0 1rem 0; color: white; font-size: 1.5rem; font-weight: 700;">Lightning Fast</h3>
-                <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">Get comprehensive results and insights in under 30 seconds</p>
+            <div style="text-align: center; padding: 1.75rem 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; color: white; height: 200px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 8px 20px rgba(245, 87, 108, 0.25);">
+                <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">⚡</div>
+                <h3 style="margin: 0 0 0.75rem 0; color: white; font-size: 1.25rem; font-weight: 600;">Lightning Fast</h3>
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.95; line-height: 1.5;">Results in under 30 seconds</p>
             </div>
             """, unsafe_allow_html=True)
         
         with col3:
             st.markdown("""
-            <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 20px; color: white; height: 260px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(79, 172, 254, 0.25);">
-                <div style="font-size: 3.5rem; margin-bottom: 1.25rem;">📊</div>
-                <h3 style="margin: 0 0 1rem 0; color: white; font-size: 1.5rem; font-weight: 700;">Rich Insights</h3>
-                <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">Financial metrics, interactive charts, and detailed profiles</p>
+            <div style="text-align: center; padding: 1.75rem 1.5rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 15px; color: white; height: 200px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 8px 20px rgba(79, 172, 254, 0.25);">
+                <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📊</div>
+                <h3 style="margin: 0 0 0.75rem 0; color: white; font-size: 1.25rem; font-weight: 600;">Rich Insights</h3>
+                <p style="margin: 0; font-size: 0.9rem; opacity: 0.95; line-height: 1.5;">Financial data & visualizations</p>
             </div>
             """, unsafe_allow_html=True)
         
@@ -465,9 +465,9 @@ def main():
         
         # Enhanced input form
         st.markdown("""
-        <div style="background: white; padding: 2.5rem; border-radius: 15px; border: 2px solid #e8e8e8; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-            <h2 style="margin: 0 0 0.5rem 0; font-size: 1.8rem; color: #1a1a1a;">📝 Enter Company Details</h2>
-            <p style="margin: 0 0 1.5rem 0; color: #666; font-size: 1rem;">The more detail you provide, the better your results</p>
+        <div style="background: rgba(255,255,255,0.05); padding: 1.5rem 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem;">
+            <h2 style="margin: 0 0 0.25rem 0; font-size: 1.5rem; color: #fff;">📝 Enter Company Details</h2>
+            <p style="margin: 0; color: #aaa; font-size: 0.9rem;">The more detail you provide, the better your results</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -584,7 +584,7 @@ def main():
         
 
         with tab2:
-            st.header("Search Results")
+        st.header("Search Results")
         
         if st.session_state.search_results:
             results = st.session_state.search_results
@@ -774,6 +774,4 @@ if __name__ == "__main__":
     # Load history on startup
     load_search_history()
     main()
-
-
 
