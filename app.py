@@ -623,7 +623,7 @@ def main():
                     status_container.markdown('<div class="status-box status-analyzing">🧠 Analyzing target company...</div>', unsafe_allow_html=True)
                     
                     results = agent.find_comparables(
-                        target_company=target,
+                        target,
                         progress_callback=lambda p, s: (
                             progress_bar.progress(p),
                             status_container.markdown(f'<div class="status-box status-{s.lower().replace(" ", "-")}">{s}</div>', unsafe_allow_html=True)
