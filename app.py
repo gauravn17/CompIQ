@@ -290,27 +290,24 @@ def render_company_card(comp: Dict[str, Any], rank: int):
             st.info(f"ℹ️ {comp.get('_verification_note', 'Manual verification recommended')}")
 
 def main():
-    # Header with logo
-    col1, col2 = st.columns([1.2, 3.8])
-    
-    with col1:
-        # Display logo - larger and more prominent
-        try:
-            st.image("compiq.png", width=150)
-        except:
-            st.markdown("🔍")
-    
-    with col2:
-        st.markdown("""
-        <div style="padding-top: 20px;">
-            <h1 class="brand-title">CompIQ</h1>
-            <p class="brand-subtitle">AI-Powered Comparable Company Analysis</p>
+    # Professional header with perfect alignment
+    st.markdown("""
+    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0;">
+            🔍
         </div>
-        """, unsafe_allow_html=True)
-        if ENHANCED_FEATURES:
-            st.markdown('<span class="v2-badge">v2.0 ENHANCED</span>', unsafe_allow_html=True)
+        <div style="flex: 1;">
+            <h1 style="margin: 0; font-size: 2.5rem; font-weight: 700; color: #000000; line-height: 1.2;">CompIQ</h1>
+            <p style="margin: 0.25rem 0 0 0; font-size: 1.05rem; color: #666; font-weight: 400;">AI-Powered Comparable Company Analysis</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    if ENHANCED_FEATURES:
+        st.markdown('<span class="v2-badge" style="margin-left: 95px;">v2.0 ENHANCED</span>', unsafe_allow_html=True)
     
     st.divider()
+
     
     # Sidebar
     with st.sidebar:
@@ -402,211 +399,191 @@ def main():
     tab1, tab2, tab3 = st.tabs(["🔍 New Search", "📊 Results", "📚 Database"])
     
     with tab1:
-        # Hero section with better layout
+        # Stunning hero section
         st.markdown("""
-        <div style="text-align: center; padding: 2rem 0 1rem 0;">
-            <h2 style="color: #1f77b4; margin-bottom: 0.5rem;">Find Your Perfect Comparables</h2>
-            <p style="color: #666; font-size: 1.1rem;">AI-powered company analysis in seconds</p>
+        <div style="text-align: center; padding: 3.5rem 2rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%); border-radius: 20px; margin-bottom: 3rem;">
+            <h1 style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.25rem; letter-spacing: -0.02em;">
+                Find Your Perfect Comparables
+            </h1>
+            <p style="font-size: 1.4rem; color: #444; margin-bottom: 2.5rem; font-weight: 400; max-width: 700px; margin-left: auto; margin-right: auto;">
+                AI-powered company analysis • Delivered in seconds
+            </p>
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; max-width: 750px; margin: 0 auto;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span>
+                    </div>
+                    <span style="color: #333; font-weight: 500; font-size: 1.05rem;">100,000+ Companies</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span>
+                    </div>
+                    <span style="color: #333; font-weight: 500; font-size: 1.05rem;">Real-time Data</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: bold; font-size: 1.1rem;">✓</span>
+                    </div>
+                    <span style="color: #333; font-weight: 500; font-size: 1.05rem;">AI Matching</span>
+                </div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Feature highlights
-        col1, col2, col3 = st.columns(3)
+        # Premium feature cards
+        col1, col2, col3 = st.columns(3, gap="large")
+        
         with col1:
             st.markdown("""
-            <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; margin-bottom: 1rem;">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
-                <h4 style="margin: 0; color: white;">Smart Analysis</h4>
-                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">AI understands your business model</p>
+            <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white; height: 260px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);">
+                <div style="font-size: 3.5rem; margin-bottom: 1.25rem;">🎯</div>
+                <h3 style="margin: 0 0 1rem 0; color: white; font-size: 1.5rem; font-weight: 700;">Smart Analysis</h3>
+                <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">AI deeply understands your business model and finds the best matches</p>
             </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown("""
-            <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 10px; color: white; margin-bottom: 1rem;">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
-                <h4 style="margin: 0; color: white;">Lightning Fast</h4>
-                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Get results in under 30 seconds</p>
+            <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 20px; color: white; height: 260px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(245, 87, 108, 0.25);">
+                <div style="font-size: 3.5rem; margin-bottom: 1.25rem;">⚡</div>
+                <h3 style="margin: 0 0 1rem 0; color: white; font-size: 1.5rem; font-weight: 700;">Lightning Fast</h3>
+                <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">Get comprehensive results and insights in under 30 seconds</p>
             </div>
             """, unsafe_allow_html=True)
         
         with col3:
             st.markdown("""
-            <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 10px; color: white; margin-bottom: 1rem;">
-                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📊</div>
-                <h4 style="margin: 0; color: white;">Rich Insights</h4>
-                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Financial data & visualizations</p>
+            <div style="text-align: center; padding: 2.5rem 2rem; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 20px; color: white; height: 260px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px rgba(79, 172, 254, 0.25);">
+                <div style="font-size: 3.5rem; margin-bottom: 1.25rem;">📊</div>
+                <h3 style="margin: 0 0 1rem 0; color: white; font-size: 1.5rem; font-weight: 700;">Rich Insights</h3>
+                <p style="margin: 0; font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">Financial metrics, interactive charts, and detailed profiles</p>
             </div>
             """, unsafe_allow_html=True)
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
         
-        # Input form with better styling
+        # Enhanced input form
         st.markdown("""
-        <div style="background: #f8f9fa; padding: 2rem; border-radius: 10px; border: 1px solid #e0e0e0;">
+        <div style="background: white; padding: 2.5rem; border-radius: 15px; border: 2px solid #e8e8e8; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h2 style="margin: 0 0 0.5rem 0; font-size: 1.8rem; color: #1a1a1a;">📝 Enter Company Details</h2>
+            <p style="margin: 0 0 1.5rem 0; color: #666; font-size: 1rem;">The more detail you provide, the better your results</p>
+        </div>
         """, unsafe_allow_html=True)
         
         with st.form("target_company_form"):
-            st.markdown("### 📝 Enter Company Details")
-            st.markdown("---")
+            st.markdown("<br>", unsafe_allow_html=True)
             
-            col1, col2 = st.columns([2, 1])
+            col1, col2 = st.columns([3, 2])
             
             with col1:
+                st.markdown("**Company Name** <span style='color: #f5576c;'>*</span>", unsafe_allow_html=True)
                 company_name = st.text_input(
-                    "Company Name *",
+                    "Company Name",
                     placeholder="e.g., Apple Inc.",
                     help="Name of the target company",
-                    key="company_name_input"
-                )
-                
-                company_description = st.text_area(
-                    "Business Description *",
-                    height=120,
-                    placeholder="Example: Designs, develops, and sells consumer electronics, computer software, and online services. Products include iPhone, Mac, iPad, Apple Watch, and services like App Store and Apple Music.",
-                    help="The more detailed, the better the results"
-                )
-            
-            with col2:
-                homepage_url = st.text_input(
-                    "Homepage URL",
-                    placeholder="https://www.apple.com",
-                    help="Optional: Company website"
-                )
-                
-                primary_sic = st.text_input(
-                    "Primary SIC",
-                    placeholder="Electronic Computers",
-                    help="Optional: Industry classification"
+                    label_visibility="collapsed"
                 )
                 
                 st.markdown("<br>", unsafe_allow_html=True)
-                st.info("💡 **Tip:** More detail = Better matches!")
+                st.markdown("**Business Description** <span style='color: #f5576c;'>*</span>", unsafe_allow_html=True)
+                company_description = st.text_area(
+                    "Business Description",
+                    height=140,
+                    placeholder="Example: Designs, develops, and sells consumer electronics, computer software, and online services. Products include iPhone, Mac, iPad, Apple Watch, and services like App Store, Apple Music, and iCloud.",
+                    help="Provide a detailed description",
+                    label_visibility="collapsed"
+                )
             
-            st.markdown("---")
-            submitted = st.form_submit_button("🚀 Find Comparables", use_container_width=True, type="primary")
+            with col2:
+                st.markdown("**Homepage URL**", unsafe_allow_html=True)
+                homepage_url = st.text_input(
+                    "Homepage URL",
+                    placeholder="https://www.apple.com",
+                    help="Optional: Company website",
+                    label_visibility="collapsed"
+                )
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown("**Primary Industry**", unsafe_allow_html=True)
+                primary_sic = st.text_input(
+                    "Primary SIC",
+                    placeholder="e.g., Consumer Electronics",
+                    help="Optional: Industry classification",
+                    label_visibility="collapsed"
+                )
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+                # Tips box
+                st.markdown("""
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.25rem; border-radius: 10px; color: white; margin-top: 1rem;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 1rem;">💡 Pro Tips</div>
+                    <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                        <li>Include key products/services</li>
+                        <li>Mention target markets</li>
+                        <li>Describe business model</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            # Submit button
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
+                submitted = st.form_submit_button(
+                    "🚀 Find Comparables",
+                    use_container_width=True,
+                    type="primary"
+                )
         
         st.markdown("</div>", unsafe_allow_html=True)
-        
-        # Use cases section
         st.markdown("<br><br>", unsafe_allow_html=True)
         
-        with st.expander("💼 Popular Use Cases", expanded=False):
-            col1, col2 = st.columns(2)
-            with col1:
+        # Enhanced expandable sections
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            with st.expander("💼 Popular Use Cases", expanded=False):
                 st.markdown("""
                 **Investment Research**
-                - Find peer companies for valuation analysis
-                - Compare financial metrics and multiples
-                - Identify investment opportunities
+                - Find peer companies for valuation
+                - Compare financial metrics
+                - Identify opportunities
                 
                 **M&A Analysis**
                 - Identify acquisition targets
-                - Benchmark deal valuations
+                - Benchmark valuations
                 - Assess strategic fit
-                """)
-            with col2:
-                st.markdown("""
+                
                 **Competitive Intelligence**
                 - Map competitive landscape
                 - Track industry trends
-                - Monitor market positioning
-                
-                **Strategic Planning**
-                - Identify strategic partners
-                - Benchmark performance
-                - Market opportunity sizing
+                - Monitor positioning
                 """)
         
-        with st.expander("❓ How It Works", expanded=False):
-            st.markdown("""
-            1. **AI Analysis** - Our AI analyzes your company's business model, products, and market position
-            2. **Smart Search** - We search our database of 100,000+ public companies
-            3. **Validation** - Each match is scored on business model similarity, industry fit, and scale
-            4. **Rich Data** - Get financial metrics, visualizations, and detailed company profiles
-            
-            **Powered by:**
-            - OpenAI GPT-4 for intelligent analysis
-            - Real-time financial data from Yahoo Finance
-            - Comprehensive company database
-            """)
+        with col2:
+            with st.expander("❓ How It Works", expanded=False):
+                st.markdown("""
+                **1. AI Analysis**  
+                Our AI analyzes your company's business model and market position
+                
+                **2. Smart Search**  
+                We search 100,000+ public companies globally
+                
+                **3. Validation**  
+                Each match is scored on similarity, fit, and scale
+                
+                **4. Rich Data**  
+                Get metrics, visualizations, and profiles
+                
+                ---
+                *Powered by OpenAI GPT-4 & Yahoo Finance*
+                """)
         
-        
-        # Process search
-        if submitted and company_name and company_description:
-            if not (api_key or env_key):
-                st.error("⚠️ Please provide an OpenAI API key in the sidebar")
-            else:
-                # Create target company dict
-                target = {
-                    "name": company_name,
-                    "description": company_description,
-                    "homepage_url": homepage_url or "https://example.com",
-                    "primary_sic": primary_sic or "Unknown"
-                }
-                
-                # Progress tracking
-                progress_bar = st.progress(0)
-                status_container = st.container()
-                
-                with status_container:
-                    st.markdown('<div class="status-box status-analyzing">⏳ Analyzing target company...</div>', unsafe_allow_html=True)
-                
-                try:
-                    # Initialize agent
-                    agent = ComparablesAgent(
-                        min_required=min_required,
-                        max_allowed=max_allowed,
-                        max_attempts=max_attempts
-                    )
-                    
-                    # Run search with progress updates
-                    progress_bar.progress(10)
-                    status_container.markdown('<div class="status-box status-analyzing">🧠 Analyzing target company...</div>', unsafe_allow_html=True)
-                    
-                    results = agent.find_comparables(
-                        target,
-                        progress_callback=lambda step, progress: progress_bar.progress(progress)
-                    )
-                    
-                    # Enrich with financial data if enabled
-                    if ENHANCED_FEATURES and enable_financials:
-                        progress_bar.progress(93)
-                        status_container.markdown('<div class="status-box status-analyzing">💰 Loading financial data...</div>', unsafe_allow_html=True)
-                        
-                        enricher = FinancialDataEnricher()
-                        results['comparables'] = enricher.enrich_batch(results['comparables'])
-                    
-                    progress_bar.progress(100)
-                    status_container.markdown('<div class="status-box status-complete">✅ Search complete!</div>', unsafe_allow_html=True)
-                    
-                    # Store results
-                    st.session_state.search_results = {
-                        'comparables': results['comparables'],
-                        'metadata': results['metadata'],
-                        'target': target
-                    }
-                    
-                    # Save to database
-                    search_id = st.session_state.db.save_search(
-                        target_name=company_name,
-                        target_data=target,
-                        comparables=results['comparables'],
-                        metadata=results['metadata']
-                    )
-                    
-                    st.success(f"✅ Found {len(results['comparables'])} comparable companies!")
-                    st.balloons()
-                    
-                    # Auto-switch to results tab
-                    time.sleep(1)
-                    st.rerun()
-                    
-                except Exception as e:
-                    st.error(f"❌ Error during search: {str(e)}")
-                    status_container.markdown(f'<div class="status-box status-validating">❌ Error: {str(e)}</div>', unsafe_allow_html=True)
-    
-    with tab2:
+
+        with tab2:
         st.header("Search Results")
         
         if st.session_state.search_results:
@@ -797,5 +774,6 @@ if __name__ == "__main__":
     # Load history on startup
     load_search_history()
     main()
+
 
 
