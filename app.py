@@ -189,51 +189,44 @@ def render_company_card(comp: Dict[str, Any], rank: int):
     # Get financial data if available
     fin = comp.get('financials', {})
     
-    # Build the card HTML with logo
-    card_html = f"""
-    <div class="company-card">
-        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
-            <img src="{logo_primary}" 
-                 onerror="this.onerror=null; this.src='{logo_fallback1}';"
-                 style="width: 56px; height: 56px; border-radius: 8px; object-fit: contain; background: #f8f9fa; padding: 4px; border: 1px solid #e0e0e0; flex-shrink: 0;"
-                 alt="{comp['name']} logo">
-            <div style="flex: 1; min-width: 0;">
-                <h3 style="margin: 0; font-size: 1.3rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{rank}. {comp['name']}</h3>
-                <p style="margin: 0.25rem 0 0 0; color: #666; font-size: 0.9rem;">
-                    <strong>{comp['ticker']}</strong> • {comp['exchange']}
-                </p>
-            </div>
-            <span class="score-badge {score_class}" style="font-size: 1.1rem; padding: 0.4rem 0.9rem; flex-shrink: 0;">{score:.2f}</span>
+    # Build the card HTML with logo - NO INDENTATION in the string
+    card_html = f"""<div class="company-card">
+    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
+        <img src="{logo_primary}" 
+             onerror="this.onerror=null; this.src='{logo_fallback1}';"
+             style="width: 56px; height: 56px; border-radius: 8px; object-fit: contain; background: #f8f9fa; padding: 4px; border: 1px solid #e0e0e0; flex-shrink: 0;"
+             alt="{comp['name']} logo">
+        <div style="flex: 1; min-width: 0;">
+            <h3 style="margin: 0; font-size: 1.3rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{rank}. {comp['name']}</h3>
+            <p style="margin: 0.25rem 0 0 0; color: #666; font-size: 0.9rem;">
+                <strong>{comp['ticker']}</strong> • {comp['exchange']}
+            </p>
         </div>
-        
-        <p style="margin: 0.5rem 0 0.5rem 72px; font-size: 0.95rem; line-height: 1.4; color: #333;">
-            {comp.get('business_activity', 'N/A')[:180]}...
-        </p>
-    """
+        <span class="score-badge {score_class}" style="font-size: 1.1rem; padding: 0.4rem 0.9rem; flex-shrink: 0;">{score:.2f}</span>
+    </div>
+    <p style="margin: 0.5rem 0 0.5rem 72px; font-size: 0.95rem; line-height: 1.4; color: #333;">
+        {comp.get('business_activity', 'N/A')[:180]}...
+    </p>"""
     
     # Add financial metrics inline if available
     if ENHANCED_FEATURES and fin.get('market_cap_formatted'):
-        card_html += f"""
-        <div style="display: flex; gap: 1.5rem; margin: 0.75rem 0 0 72px; padding-top: 0.75rem; border-top: 1px solid #eee; font-size: 0.85rem; flex-wrap: wrap;">
-            <span style="display: flex; align-items: center; gap: 0.25rem;">
-                <span style="color: #666;">💰</span>
-                <strong>Market Cap:</strong> {fin.get('market_cap_formatted', 'N/A')}
-            </span>
-            <span style="display: flex; align-items: center; gap: 0.25rem;">
-                <span style="color: #666;">📊</span>
-                <strong>Revenue:</strong> {fin.get('revenue_ttm_formatted', 'N/A')}
-            </span>
-            <span style="display: flex; align-items: center; gap: 0.25rem;">
-                <span style="color: #666;">📈</span>
-                <strong>EV/Rev:</strong> {fin.get('ev_to_revenue', 'N/A')}x
-            </span>
-        </div>
-        """
+        card_html += f"""<div style="display: flex; gap: 1.5rem; margin: 0.75rem 0 0 72px; padding-top: 0.75rem; border-top: 1px solid #eee; font-size: 0.85rem; flex-wrap: wrap;">
+        <span style="display: flex; align-items: center; gap: 0.25rem;">
+            <span style="color: #666;">💰</span>
+            <strong>Market Cap:</strong> {fin.get('market_cap_formatted', 'N/A')}
+        </span>
+        <span style="display: flex; align-items: center; gap: 0.25rem;">
+            <span style="color: #666;">📊</span>
+            <strong>Revenue:</strong> {fin.get('revenue_ttm_formatted', 'N/A')}
+        </span>
+        <span style="display: flex; align-items: center; gap: 0.25rem;">
+            <span style="color: #666;">📈</span>
+            <strong>EV/Rev:</strong> {fin.get('ev_to_revenue', 'N/A')}x
+        </span>
+    </div>"""
     
     # Close the card div
-    card_html += """
-    </div>
-    """
+    card_html += "</div>"
     
     st.markdown(card_html, unsafe_allow_html=True)
     
