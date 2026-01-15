@@ -591,7 +591,7 @@ def main():
                 *Powered by OpenAI GPT-4 & Yahoo Finance*
                 """)
 
-     if submitted and company_name and company_description:
+       if submitted and company_name and company_description:
             if not (api_key or env_key):
                 st.error("⚠️ Please provide an OpenAI API key in the sidebar")
             else:
