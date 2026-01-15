@@ -30,7 +30,7 @@ st.set_page_config(
 st.markdown("""
 <style>
     .main-header {
-        font-size: 2.5rem;
+        font-size: 7.5rem;
         font-weight: bold;
         color: #1f77b4;
         margin-bottom: 0.5rem;
@@ -42,8 +42,8 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     .logo-image {
-        width: 800px;
-        height: 800px;
+        width: 1600px;
+        height: 1600px;
         filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
     .brand-title {
