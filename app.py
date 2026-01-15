@@ -42,8 +42,8 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     .logo-image {
-        width: 150px;
-        height: 150px;
+        width: 450px;
+        height: 450px;
         filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
     .brand-title {
