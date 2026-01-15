@@ -290,23 +290,32 @@ def render_company_card(comp: Dict[str, Any], rank: int):
             st.info(f"ℹ️ {comp.get('_verification_note', 'Manual verification recommended')}")
 
 def main():
-    # Professional header with perfect alignment
-    st.markdown("""
-    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 15px;">
-        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
-            🔍
-        </div>
-        <div style="flex: 1;">
-            <h1 style="margin: 0; font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">CompIQ</h1>
+    # Professional header with CompIQ logo and white text
+    col_logo, col_title = st.columns([0.8, 5])
+    
+    with col_logo:
+        try:
+            st.image("compiq.png", width=80)
+        except:
+            st.markdown("""
+            <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                🔍
+            </div>
+            """, unsafe_allow_html=True)
+    
+    with col_title:
+        st.markdown("""
+        <div style="padding-top: 10px;">
+            <h1 style="margin: 0; font-size: 2.5rem; font-weight: 700; color: #ffffff; line-height: 1.2;">CompIQ</h1>
             <p style="margin: 0.25rem 0 0 0; font-size: 1.05rem; color: #aaa; font-weight: 400;">AI-Powered Comparable Company Analysis</p>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
     
     if ENHANCED_FEATURES:
-        st.markdown('<span class="v2-badge" style="margin-left: 95px;">v2.0 ENHANCED</span>', unsafe_allow_html=True)
+        st.markdown('<span class="v2-badge">v2.0 ENHANCED</span>', unsafe_allow_html=True)
     
     st.divider()
+
 
     
     # Sidebar
@@ -584,7 +593,7 @@ def main():
         
 
         with tab2:
-            st.header("Search Results")
+        st.header("Search Results")
         
         if st.session_state.search_results:
             results = st.session_state.search_results
@@ -774,4 +783,3 @@ if __name__ == "__main__":
     # Load history on startup
     load_search_history()
     main()
-
