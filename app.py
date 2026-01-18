@@ -625,11 +625,11 @@ def main():
                    results = agent.find_comparables(target)
 
                     # Ensure target is included in results
-                    if 'target' not in results:
+                   if 'target' not in results:
                         results['target'] = target
                     
-                    progress_bar.progress(100)
-                    status_container.markdown('<div class="status-box status-complete">✅ Search complete!</div>', unsafe_allow_html=True)
+                   progress_bar.progress(100)
+                   status_container.markdown('<div class="status-box status-complete">✅ Search complete!</div>', unsafe_allow_html=True)
                     
                     # Enrich with financial data if enabled
                     if ENHANCED_FEATURES and enable_financials and results['comparables']:
