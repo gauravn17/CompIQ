@@ -6,3 +6,5 @@ openpyxl>=3.1.0
 python-dotenv>=1.0.0
 yfinance>=0.2.0
 plotly>=5.14.0
+uvicorn
+fastapi
