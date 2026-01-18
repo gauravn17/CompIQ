@@ -59,11 +59,20 @@ class CompIQVisualizer:
         
         for comp in comparables:
             fin = comp.get('financials', {})
-            if fin.get('market_cap') and fin.get('ev_to_revenue'):
+            ev_to_rev = fin.get('ev_to_revenue')
+            
+            # Convert ev_to_revenue to float if it's a string
+            if isinstance(ev_to_rev, str):
+                try:
+                    ev_to_rev = float(ev_to_rev)
+                except (ValueError, TypeError):
+                    ev_to_rev = None
+            
+            if fin.get('market_cap') and ev_to_rev:
                 data.append({
                     'name': comp.get('name', 'Unknown')[:20],
                     'market_cap': fin['market_cap'],
-                    'ev_revenue': fin['ev_to_revenue'],
+                    'ev_revenue': ev_to_rev,
                     'score': comp.get('validation_score', 0),
                     'ticker': comp.get('ticker', '')
                 })
@@ -87,7 +96,7 @@ class CompIQVisualizer:
             hover_data={'name': True, 'ticker': True, 
                        'market_cap_jitter': False, 'ev_revenue_jitter': False,
                        'market_cap': True, 'ev_revenue': True},
-            text='ticker',  # Show ticker instead of full name
+            text='ticker',
             color_continuous_scale='RdYlGn',
             labels={
                 'market_cap_jitter': 'Market Cap ($)',
@@ -318,7 +327,11 @@ def render_comparison_matrix(
                 st.metric("Revenue (TTM)", fin['revenue_ttm_formatted'])
             
             if fin.get('ev_to_revenue'):
-                st.metric("EV/Revenue", f"{fin['ev_to_revenue']:.2f}x")
+                ev_val = fin['ev_to_revenue']
+                if isinstance(ev_val, str):
+                    st.metric("EV/Revenue", f"{ev_val}x")
+                else:
+                    st.metric("EV/Revenue", f"{ev_val:.2f}x")
             
             if fin.get('revenue_growth'):
                 growth = fin['revenue_growth'] * 100
