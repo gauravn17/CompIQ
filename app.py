@@ -622,7 +622,7 @@ def main():
                     progress_bar.progress(10)
                     status_container.markdown('<div class="status-box status-analyzing">🧠 Analyzing target company...</div>', unsafe_allow_html=True)
                     
-                   results = agent.find_comparables(target)
+                 results = agent.find_comparables(target)
 
                     # Ensure target is included in results
                    if 'target' not in results:
