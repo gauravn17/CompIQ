@@ -13,6 +13,7 @@ An intelligent, agentic system for finding publicly-traded comparable companies 
 
 [Uploading Screenshot 2026-01-15 at 12.29.57 PM.png…]()
 
+<img width="1710" height="1107" alt="Screenshot 2026-01-14 at 9 08 11 PM" src="https://github.com/user-attachments/assets/bcc69844-df4a-40cd-9474-9bd9067bcc16" />
 
 - **AI-Powered Analysis**: Uses GPT-4 to deeply understand your target company
 - **Dynamic Validation**: Automatically verifies companies are currently publicly traded
