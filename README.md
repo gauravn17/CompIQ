@@ -183,7 +183,7 @@ Edit CSS in `app.py` or use Streamlit's built-in themes:
 streamlit run app.py --theme.base="dark"
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### "No candidates generated"
 - **Cause**: Target description may be too vague
@@ -197,7 +197,7 @@ streamlit run app.py --theme.base="dark"
 - **Cause**: OpenAI API rate limits or network latency
 - **Fix**: Reduce batch sizes in `_verify_batch()` or add longer delays
 
-## 📈 Future Enhancements
+##  Future Enhancements
 
 Potential additions:
 - [ ] Excel export with formatted reports
@@ -208,7 +208,7 @@ Potential additions:
 - [ ] Collaborative features (team sharing)
 - [ ] API endpoint for programmatic access
 
-## 🤝 Contributing
+##  Contributing
 
 This is a personal project, but suggestions welcome! Key areas for contribution:
 - Additional validation heuristics
@@ -220,7 +220,7 @@ This is a personal project, but suggestions welcome! Key areas for contribution:
 
 MIT License - feel free to use and modify for your own projects.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 Built using:
 - [Streamlit](https://streamlit.io/) - Web framework
