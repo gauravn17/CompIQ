@@ -1,4 +1,4 @@
-# 🔍 CompIQ - Agentic AI Comparables Finder
+<img width="1700" height="1023" alt="Screenshot 2026-01-15 at 12 29 57 PM" src="https://github.com/user-attachments/assets/39d41db0-65d5-4da2-acce-a35bcd3ac684" /># 🔍 CompIQ - Agentic AI Comparables Finder
 
 <img src="compiq.png" alt="CompIQ Logo" width="750"/>
 
@@ -8,7 +8,11 @@ An intelligent, agentic system for finding publicly-traded comparable companies 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28%2B-red)
 
-## 🎯 Features
+## 🎯 Features!
+![Uploading Screenshot 2026-01-14 at 9.08.24 PM.png…]()
+
+[Uploading Screenshot 2026-01-15 at 12.29.57 PM.png…]()
+
 
 - **AI-Powered Analysis**: Uses GPT-4 to deeply understand your target company
 - **Dynamic Validation**: Automatically verifies companies are currently publicly traded
